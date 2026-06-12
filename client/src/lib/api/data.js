@@ -19,3 +19,7 @@ export const OrganizationEvents = async(email) => {
 export const browseData = async () => {
     return await getSerVer(`/api/event`)
 }
+
+export const browseIdData = async (id) => {
+    return await getSerVer(`/api/event/id/${id}`)
+}

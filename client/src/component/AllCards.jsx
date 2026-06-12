@@ -1,5 +1,6 @@
 import { browseData } from '@/lib/api/data';
 import React from 'react';
+import Card from './Card';
 
 const AllCards = async () => {
 
@@ -7,8 +8,10 @@ const AllCards = async () => {
     console.log(data)
 
     return (
-        <div>
-            
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-[80%] mx-auto'>
+            {
+                data.map(v => <Card key={v._id} event={v}></Card>)
+            }
         </div>
     );
 };

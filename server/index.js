@@ -101,6 +101,16 @@ const run = async () => {
           // console.log(result)
         })
 
+        app.get('/api/event/id/:id', async(req,res) => {
+          const {id} = req.params
+          console.log(id)
+          const query = {
+            _id: new ObjectId(id)
+          }
+          const result = await eventsCollection.findOne(query)
+          res.send(result)
+        })
+
         app.get('/api/event', async(req,res) => {
           const result = await eventsCollection.find().toArray()
           res.send(result)
