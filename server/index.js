@@ -27,14 +27,15 @@ const run = async () => {
         // await client.connect();
 
         const db = client.db('ticketoAuth')
-        const userCollection = db.collection('allData')
+        const dataCollection = db.collection('allData')
         const organizaionCollection = db.collection('organizaion')
         const eventsCollection = db.collection('events')
         const bookingCollection = db.collection('booking')
         const paymentsCollection = db.collection('payments')
+        const userCollection = db.collection('user')
 
         app.get('/user', async (req,res) => {
-            const result = await userCollection.find().toArray()
+            const result = await dataCollection.find().toArray()
             res.send(result)
         })
 
@@ -82,6 +83,17 @@ const run = async () => {
 
         app.post('/api/event', async (req,res) => {
           const m = req.body
+          console.log(m)
+          const organizer = await userCollection.findOne({email: m.organizationEmail})
+          const organizerCountEvent = await eventsCollection.countDocuments({organizationEmail: m.organizationEmail})
+          // console.log(organizerCountEvent)
+
+          if(!organizer?.isPremium && organizerCountEvent >= 3){
+            return res.status(401).send({
+              message: 'Your free limit is over'
+            })
+          }
+
           const newData = {
             ...m,
             createdAt: new Date(),
@@ -103,7 +115,6 @@ const run = async () => {
 
         app.get('/api/event/id/:id', async(req,res) => {
           const {id} = req.params
-          console.log(id)
           const query = {
             _id: new ObjectId(id)
           }

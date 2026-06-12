@@ -48,6 +48,7 @@ const RegisterPage = () => {
         image: imageUrl,
         role: v.role,
         isblock: false,
+        isPremium: false,
         callbackURL: "/",
       });
 

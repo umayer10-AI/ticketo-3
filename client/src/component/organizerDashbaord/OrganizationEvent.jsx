@@ -62,9 +62,13 @@ export default function OrganizationEvent() {
 
       // 👉 API CALL HERE
       const addData = await eventAddOrganization(eventData)
+      // console.log(addData)
 
       if(addData.insertedId){
-        toast.success("Event created successfully 🚀");
+        toast.success("Event created successfully");
+      }
+      else{
+        toast.error(addData.message || 'Event not created..');
       }
 
 
