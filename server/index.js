@@ -101,6 +101,11 @@ const run = async () => {
           // console.log(result)
         })
 
+        app.get('/api/event', async(req,res) => {
+          const result = await eventsCollection.find().toArray()
+          res.send(result)
+        })
+
         app.patch('/api/event/:id', async(req,res) => {
           const {id} = req.params
           const query = {

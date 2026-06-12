@@ -15,3 +15,7 @@ export const OrganizationEvents = async(email) => {
     // console.log(email)
     return await getSerVer(`/api/event/${email}`)
 }
+
+export const browseData = async () => {
+    return await getSerVer(`/api/event`)
+}
