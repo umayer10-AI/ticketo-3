@@ -23,3 +23,12 @@ export const browseData = async () => {
 export const browseIdData = async (id) => {
     return await getSerVer(`/api/event/id/${id}`)
 }
+
+export const searchingData = async (s) => {
+    if(s){
+        return await getSerVer(`/api/event?search=${s}`)
+    }
+    else{
+        return await getSerVer(`/api/event`)
+    }
+}

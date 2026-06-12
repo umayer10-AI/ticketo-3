@@ -123,8 +123,35 @@ const run = async () => {
         })
 
         app.get('/api/event', async(req,res) => {
-          const result = await eventsCollection.find().toArray()
+
+          const {search} = req.query
+          // console.log(search)
+
+          let cursor;
+          if(!search){
+            cursor = await eventsCollection.find()
+          }
+          else{
+            cursor = await eventsCollection.find({
+              $or:[
+                {
+                  title: {
+                    $regex: search,
+                    $options: 'i'
+                  }
+                },
+                {
+                  description: {
+                    $regex: search,
+                    $options: 'i'
+                  }
+                },
+              ]
+            })
+          }
+          const result = await cursor.toArray()
           res.send(result)
+          console.log(result)
         })
 
         app.patch('/api/event/:id', async(req,res) => {

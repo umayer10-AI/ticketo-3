@@ -6,11 +6,13 @@ const Card = ({event}) => {
     return (
         <div>
         <div className="bg-[#111827] border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
+  {event?.image && (
   <img
-    src={event?.image}
-    alt={event?.title}
+    src={event.image}
+    alt={event.title}
     className="w-full h-52 object-cover"
   />
+)}
 
   <div className="p-5">
     <div className="flex justify-between items-start gap-3">

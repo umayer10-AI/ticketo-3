@@ -1,11 +1,29 @@
-import { browseData } from '@/lib/api/data';
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Card from './Card';
+import { useRouter } from 'next/navigation';
+import { searchingData } from '@/lib/api/data';
 
-const AllCards = async () => {
+const AllCards = ({filterData}) => {
 
-    const data = await browseData()
-    console.log(data)
+    const BaseUrl = process.env.NEXT_PUBLIC_SERVER_URL
+
+    const [s, setS] = useState('')
+    const router = useRouter()
+
+    const a = () => {
+        console.log(s)
+        if(!s){
+            router.push(`/browse`)
+        }else{
+            router.push(`/browse?search=${s}`)
+        }
+    }
+
+    // let filter = [...data]
+    // if(s){
+        
+    // }
 
     return (
         <div className='max-w-[80%] mx-auto'>
@@ -15,11 +33,12 @@ const AllCards = async () => {
   <div className="flex flex-1">
     <input
       type="text"
+      onChange={(e) => setS(e.target.value)}
       placeholder="Search events..."
       className="w-full px-4 py-2 rounded-l-lg border border-gray-700 bg-[#111827] text-white outline-none"
     />
 
-    <button
+    <button onClick={a}
       className="px-5 py-2 bg-linear-to-r from-cyan-500 to-blue-700 hover:bg-blue-700 text-white rounded-r-lg transition"
     >
       Search
@@ -45,7 +64,7 @@ const AllCards = async () => {
 </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    data.map(v => <Card key={v._id} event={v}></Card>)
+                    filterData.map(v => <Card key={v._id} event={v}></Card>)
                 }
             </div>
         </div>
