@@ -125,8 +125,7 @@ const run = async () => {
         app.get('/api/event', async(req,res) => {
 
           const {search} = req.query
-          // console.log(search)
-
+ 
           let cursor;
           if(!search){
             cursor = await eventsCollection.find()
