@@ -50,7 +50,6 @@ const AllCards = ({filterData}) => {
 
 
 
-    
 
     return (
         <div className='max-w-[80%] mx-auto'>
