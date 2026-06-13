@@ -176,6 +176,25 @@ const run = async () => {
           console.log(result)
         })
 
+        app.patch('/api/users/upgrade-premium/:email', async(req,res) => {
+          const {email} = req.params
+          const result = await userCollection.updateOne({email},
+            {
+              $set:{
+                isPremium: true,
+              }
+            }
+          )
+          res.send(result)
+        })
+
+        app.get('/api/user/:email', async(req,res) => {
+          const {email} = req.params
+          const result = await userCollection.findOne({email})
+          res.json(result)
+          console.log(result)
+        })
+
         // await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } 

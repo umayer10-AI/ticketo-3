@@ -9,3 +9,8 @@ export const getSerSession = async() => {
 
     return user? user : null
 }
+
+export const getSerSessionBackend = async(email) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/user/${email}`)
+    return res.json()
+}
