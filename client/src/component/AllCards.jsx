@@ -38,6 +38,7 @@ const AllCards = ({filterData}) => {
       finalData = [...filterData].sort((a,b) => Number(a.price) - Number(b.price))
     }
 
+    
 
     return (
         <div className='max-w-[80%] mx-auto'>
