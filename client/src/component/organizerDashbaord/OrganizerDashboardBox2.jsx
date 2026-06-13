@@ -1,6 +1,12 @@
+import { getSerSession } from "@/lib/api/session";
 import Link from "next/link";
+import PremiumButton from "./PremiumButton";
 
-export default function OrganizerDashboardBox2() {
+export default async function OrganizerDashboardBox2() {
+
+  const user = await getSerSession()
+  console.log(user?.isPremium)
+
   return (
     <section className="relative overflow-hidden mt-5 rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-black p-8 md:p-12">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15),transparent_40%)]" />
@@ -24,13 +30,22 @@ export default function OrganizerDashboardBox2() {
           is in one powerful platform.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Link
-            href="/dashboard/organizer/add-event"
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          {/* <PremiumButton></PremiumButton> */}
+
+          {/* <button
             className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-700 px-6 py-3 font-semibold text-white transition hover:scale-105"
           >
             Create Event
-          </Link>
+          </button> */}
+
+          <form action="/api/checkout_sessions" method="POST">
+            <section>
+              <button type="submit" role="link" className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-700 px-6 py-3 font-semibold text-white transition hover:scale-105">
+                Premium
+              </button>
+            </section>
+          </form>
 
           <Link
             href="/events"
