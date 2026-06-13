@@ -40,7 +40,6 @@ const AllCards = ({filterData}) => {
 
 
 
-
     return (
         <div className='max-w-[80%] mx-auto'>
             <div className="flex flex-col md:flex-row gap-4 mb-8">
