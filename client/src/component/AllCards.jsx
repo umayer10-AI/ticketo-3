@@ -9,7 +9,10 @@ const AllCards = ({filterData}) => {
     const BaseUrl = process.env.NEXT_PUBLIC_SERVER_URL
 
     const [s, setS] = useState('')
+    const [sort, setSort] = useState('normal')
+    const [cat, setCategory] = useState('')
     const router = useRouter()
+    console.log(sort)
 
     const a = () => {
         console.log(s)
@@ -19,10 +22,23 @@ const AllCards = ({filterData}) => {
             router.push(`/browse?search=${s}`)
         }
     }
+    console.log(filterData)
 
-    // let filter = [...data]
-    // if(s){
-        
+    let finalData = [...filterData]
+
+    if (cat && cat !== "all") {
+      finalData = finalData.filter(v => v.category === cat);
+    }
+
+
+    if(sort==='high'){
+      finalData = [...filterData].sort((a,b) => Number(b.price) - Number(a.price))
+    }
+    else if(sort==='low'){
+      finalData = [...filterData].sort((a,b) => Number(a.price) - Number(b.price))
+    }
+    // else{
+    //   finalData = [...filterData]
     // }
 
     return (
@@ -46,7 +62,8 @@ const AllCards = ({filterData}) => {
   </div>
 
   {/* Category Filter */}
-  <select className="px-4 py-2 rounded-lg border border-gray-700 bg-[#111827] text-white">
+  <select onChange={(e) => setCategory(e.target.value)}
+  className="px-4 py-2 rounded-lg border border-gray-700 bg-[#111827] text-white">
     <option value="all">All Categories</option>
     <option value="tech">Tech</option>
     <option value="music">Music</option>
@@ -54,17 +71,18 @@ const AllCards = ({filterData}) => {
   </select>
 
   {/* Sort */}
-  <select className="px-4 py-2 rounded-lg border border-gray-700 bg-[#111827] text-white">
+  <select onChange={(e) => setSort(e.target.value)}
+  className="px-4 py-2 rounded-lg border border-gray-700 bg-[#111827] text-white">
     <option value="">Sort By</option>
-    <option value="lowToHigh">Price: Low to High</option>
-    <option value="highToLow">Price: High to Low</option>
-    <option value="newest">Newest First</option>
+    <option value="low">Price: Low to High</option>
+    <option value="high">Price: High to Low</option>
+    <option value="normal">Default</option>
   </select>
 
 </div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    filterData.map(v => <Card key={v._id} event={v}></Card>)
+                    finalData.map(v => <Card key={v._id} event={v}></Card>)
                 }
             </div>
         </div>
