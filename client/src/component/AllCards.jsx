@@ -37,9 +37,7 @@ const AllCards = ({filterData}) => {
     else if(sort==='low'){
       finalData = [...filterData].sort((a,b) => Number(a.price) - Number(b.price))
     }
-    // else{
-    //   finalData = [...filterData]
-    // }
+
 
     return (
         <div className='max-w-[80%] mx-auto'>
