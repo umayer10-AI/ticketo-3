@@ -6,6 +6,7 @@ const page = async ({params}) => {
 
     const {id} = await params
     const data = await browseIdData(id)
+    console.log(data)
 
     return (
         <div>
