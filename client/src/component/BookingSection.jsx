@@ -31,7 +31,6 @@ const BookingSection = ({ price, seats,_id,title }) => {
     }
 
 
-
   }
 
   return (
@@ -104,5 +103,6 @@ const BookingSection = ({ price, seats,_id,title }) => {
     </div>
   );
 };
+
 
 export default BookingSection;
