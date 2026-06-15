@@ -110,5 +110,4 @@ const BookingSection = ({ price, seats,_id,title }) => {
 
 
 
-
 export default BookingSection;
