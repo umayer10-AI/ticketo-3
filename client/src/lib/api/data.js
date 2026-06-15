@@ -32,3 +32,8 @@ export const searchingData = async (s) => {
         return await getSerVer(`/api/event`)
     }
 }
+
+export const paymentData = async(email) => {
+    const res = await fetch(`${BasUrl}/api/event/booking/${email}`)
+    return res.json()
+}

@@ -30,7 +30,7 @@ const run = async () => {
         const dataCollection = db.collection('allData')
         const organizaionCollection = db.collection('organizaion')
         const eventsCollection = db.collection('events')
-        const bookingCollection = db.collection('booking')
+        const bookingCollection = db.collection('bookingPyments')
         const paymentsCollection = db.collection('payments')
         const userCollection = db.collection('user')
 
@@ -192,7 +192,13 @@ const run = async () => {
           const {email} = req.params
           const result = await userCollection.findOne({email})
           res.json(result)
-          console.log(result)
+          // console.log(result)
+        })
+
+        app.get('/api/event/booking/:email', async(req,res) => {
+          const {email} = req.params
+          const result = await bookingCollection.find({userEmail: email}).toArray()
+          res.json(result)
         })
 
         // await client.db("admin").command({ ping: 1 });
